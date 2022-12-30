@@ -27,7 +27,7 @@
   value:
     test: test
   spec:
-  - type: Input
+    type: Input
     value: test
     props:
       placeholder: Value
@@ -37,7 +37,7 @@
   value:
   - xxx
   spec:
-  - type: Input
+    type: Input
     value: newString
 - key: metadata.listCustom
   type: List

@@ -1,6 +1,6 @@
-import { Form } from '@arco-design/web-react';
 import _ from 'lodash';
 import { immerUpdate } from '@/utils/utils';
+import Layout from './Layout';
 
 const components  = import.meta.globEager('./fields/*.jsx');
 
@@ -12,49 +12,67 @@ for(const [key, value] of Object.entries(components)) {
   }
 }
 
-const LuckForm = (props) => {
+const getComponent = (type) => {
+  return type === 'Custom' ? Form : (fields[type] || fields.Input);
+}
+
+const Form = (props) => {
   const { spec, value, onChange } = props;
 
   const handleChange = (path, val) => {
-    if (!path) {
-      return onChange(val)
-    }
     const newValue = immerUpdate(value, path, val);
     onChange(newValue);
   }
 
-  return spec.map(d => {
-    const C = d.type === 'Custom' ? LuckForm : (fields[d.type] || fields.Input);
-
-    return (
-      <Form.Item key={d.key || 'empty'} label={d.label || d.key}>
-        <C
-          {...(d.props || {})}
-          spec={d.spec} // Custom(Form.index)/List组件/Map组件
-          value={d.key ? _.get(value, d.key) : value}
-          onChange={(val) => handleChange(d.key, val)}
-        />
-      </Form.Item>
-    )
-  });
-}
-
-LuckForm.parseValue = (spec) => {
-  const value = {};
-  for (const d of spec) {
-    if (d.type === 'Custom') {
-      if (!d.key) {
-        return LuckForm.parseValue(d.spec);
-      }
-      _.set(value, d.key, LuckForm.parseValue(d.spec));
-    } else {
-      if (!d.key) {
-        return d.value;
-      }
-      _.set(value, d.key, d.value);
-    }
+  if (Array.isArray(spec)) {
+    return spec.map(d => {
+      const C = getComponent(d.type);
+  
+      return (
+        <Layout key={d.key} label={d.label || d.key}>
+          <C
+            {...(d.props || {})}
+            spec={d.spec} // Custom(Form.index)/List组件/Map组件
+            value={_.get(value, d.key)}
+            onChange={(val) => handleChange(d.key, val)}
+          />
+        </Layout>
+      );
+    });
   }
-  return value;
+
+  const C = getComponent(spec.type);
+
+  return (
+    <Layout label={spec.label}>
+      <C
+        {...(spec.props || {})}
+        spec={spec.spec} // Custom(Form.index)/List组件/Map组件
+        value={value}
+        onChange={(val) => onChange(val)}
+      />
+    </Layout>
+  );
 }
 
-export default LuckForm;
+Form.parseValue = (spec) => {
+  if (Array.isArray(spec)) {
+    const value = {};
+    for (const d of spec) {
+      if (d.type === 'Custom') {
+        _.set(value, d.key, Form.parseValue(d.spec));
+      } else {
+        _.set(value, d.key, d.value);
+      }
+    }
+    return value;
+  }
+
+  if (spec.type === 'Custom') {
+    return Form.parseValue(spec.spec);
+  } else {
+    return spec.value;
+  }
+}
+
+export default Form;
