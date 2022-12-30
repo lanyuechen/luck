@@ -17,7 +17,7 @@ const getComponent = (type) => {
 }
 
 const Custom = (props) => {
-  const { spec, value, onChange } = props;
+  const { spec, value, onChange, ...otherProps } = props;
 
   const handleChange = (path, val) => {
     const newValue = immerUpdate(value, path, val);
@@ -29,7 +29,7 @@ const Custom = (props) => {
       const C = getComponent(d.type);
   
       return (
-        <Layout.Item key={d.key} label={d.label || d.key}>
+        <Layout.Item key={d.key} label={d.label || d.key} rules={d.rules}>
           <C
             {...(d.props || {})}
             spec={d.spec} // Custom(Form/Custom)/List组件/Map组件
@@ -44,7 +44,7 @@ const Custom = (props) => {
   const C = getComponent(spec.type);
 
   return (
-    <Layout.Item label={spec.label}>
+    <Layout.Item label={spec.label} rules={spec.rules}>
       <C
         {...(spec.props || {})}
         spec={spec.spec} // Custom(Form/Custom)/List组件/Map组件

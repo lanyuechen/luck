@@ -2,14 +2,18 @@ import { useState } from 'react';
 import { Grid } from '@arco-design/web-react';
 import Form from '@/components/Form';
 
-import spec from '@/components/Form/demo.yaml';
+import spec from '@/components/Form/demo';
 
 export default () => {
   const [value, setValue] = useState(Form.parseValue(spec));
 
   return (
     <>
-      <Form spec={spec} value={value} onChange={(v) => setValue(v)} />
+      <Form
+        spec={spec}
+        value={value}
+        onChange={(v) => setValue(v)}
+      />
       <Grid.Row>
         <Grid.Col span={12}>
           <pre>

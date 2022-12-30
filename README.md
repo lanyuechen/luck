@@ -23,4 +23,5 @@
 | label | String | 表单项标签 | 否 | 如果不指定，则为spec.key |
 | value | - | 对应表单项的默认值，类型由type确定 | 否 | - |
 | spec | [Spec](#Spec)\|[Spec](#Spec)[] | 当type=Custom/Map/List时，子表单配置 | 否 | - |
+| rules | Rule[] | 表单验证规则 | 否 | - |
 | props | Object | 额外属性 | 否 | - |
