@@ -1,12 +1,12 @@
 import { Grid, Button } from '@arco-design/web-react';
 import { IconPlus, IconDelete } from '@arco-design/web-react/icon';
-import LuckForm from '../index';
+import Custom from '../Custom';
 
 export default (props) => {
   const { value = [], onChange, spec, ...otherProps } = props;
 
   const handleAdd = () => {
-    onChange([...value, LuckForm.parseValue(spec)]);
+    onChange([...value, Custom.parseValue(spec)]);
   }
 
   const handleChange = (idx, val) => {
@@ -22,7 +22,7 @@ export default (props) => {
       {value.map((d, i) => (
         <Grid.Row key={i} gutter={16}>
           <Grid.Col flex={1}>
-            <LuckForm
+            <Custom
               spec={spec}
               value={d}
               onChange={(v) => {

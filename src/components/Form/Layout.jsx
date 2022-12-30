@@ -1,6 +1,16 @@
 import { Form } from '@arco-design/web-react';
 
-export default (props) => {
+const Layout = (props) => {
+  const { children } = props;
+
+  return (
+    <Form autoComplete="off">
+      {children}
+    </Form>
+  );
+}
+
+Layout.Item = (props) => {
   const { label, children } = props;
 
   return (
@@ -9,3 +19,5 @@ export default (props) => {
     </Form.Item>
   );
 }
+
+export default Layout;

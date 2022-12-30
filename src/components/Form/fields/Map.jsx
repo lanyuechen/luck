@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Grid, Input, Button } from '@arco-design/web-react';
 import { IconPlus, IconDelete } from '@arco-design/web-react/icon';
-import LuckForm from '../index';
+import Custom from '../Custom';
 
 const parseValue = (data) => {
   return data.reduce((p, n) => {
@@ -21,7 +21,7 @@ export default (props) => {
   const handleAdd = () => {
     const newData = [
       ...data,
-      { _id: Math.random(), key: '', value: LuckForm.parseValue(spec) },
+      { _id: Math.random(), key: '', value: Custom.parseValue(spec) },
     ];
     setData(newData);
     onChange(parseValue(newData));
@@ -55,7 +55,7 @@ export default (props) => {
             <Input placeholder="Key" value={d.key} onChange={(v) => handleChange(d._id, 'key', v)} />
           </Grid.Col>
           <Grid.Col flex={2}>
-            <LuckForm
+            <Custom
               spec={spec}
               value={d.value}
               onChange={(v) => {
