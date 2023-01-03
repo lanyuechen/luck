@@ -1,16 +1,7 @@
 import _ from 'lodash';
 import useImmerUpdate from '@/hooks/useImmerUpdate';
+import fields from '@/components/fields';
 import Layout from './Layout';
-
-const components  = import.meta.globEager('./fields/*.jsx');
-
-const fields = {};
-for(const [key, value] of Object.entries(components)) {
-  const name = key.split('/').pop().split('.')[0];
-  if (name) {
-    fields[name] = value.default;
-  }
-}
 
 const getComponent = (type) => {
   return type === 'Custom' ? Custom : (fields[type] || fields.Input);

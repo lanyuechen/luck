@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Grid } from '@arco-design/web-react';
-import Form from '@/components/Form';
+import Form from '@/core/Form';
 
-import spec from './demo';
+import spec from './spec';
 
 export default () => {
   const [value, setValue] = useState(Form.parseValue(spec));
