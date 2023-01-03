@@ -1,15 +1,66 @@
+import { useState } from 'react';
 import { Layout } from '@arco-design/web-react';
+import Page from '@/core/Page';
 
-export default () => {
-  
+const minWidth = 60;
+const normalWidth = 256;
+const maxWidth = 512;
+
+export default (props) => {
+  const { spec } = props;
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [siderWidth, setSiderWidth] = useState(normalWidth);
+
+  const onCollapse = (collapsed) => {
+    setCollapsed(collapsed);
+    setSiderWidth(collapsed ? minWidth : normalWidth);
+  }
+
+  const handleMoving = (_, { width }) => {
+    if (width < minWidth) {
+      setSiderWidth(minWidth);
+      setCollapsed(true);
+    } else if (width > maxWidth) {
+      setSiderWidth(maxWidth);
+      setCollapsed(false);
+    } else {
+      setSiderWidth(width);
+      setCollapsed(!(width > minWidth + 20));
+    }
+  }
+
   return (
-    <Layout>
-      <Header>Header</Header>
-      <Layout>
-        <Sider>Sider</Sider>
-        <Content>Content</Content>
+    <>
+      <Layout style={{height: '100vh'}}>
+        <Layout.Header>
+          <Page spec={spec[0]} />
+        </Layout.Header>
+        <Layout>
+          <Layout.Sider
+            collapsible
+            collapsed={collapsed}
+            width={siderWidth}
+            resizeBoxProps={{
+              directions: ['right'],
+              onMoving: handleMoving,
+            }}
+            style={{
+              // height: '100%',
+              maxWidth,
+            }}
+            onCollapse={onCollapse}
+          >
+            <Page spec={spec[1]} />
+          </Layout.Sider>
+          <Layout.Content style={{padding: 8}}>
+            <Page spec={spec[2]} />
+          </Layout.Content>
+        </Layout>
+        <Layout.Footer>
+          <Page spec={spec[3]} />
+        </Layout.Footer>
       </Layout>
-      <Footer>Footer</Footer>
-    </Layout>
-  )
+    </>
+  );
 }

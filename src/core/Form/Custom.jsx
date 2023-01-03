@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import useImmerUpdate from '@/hooks/useImmerUpdate';
-import fields from '@/components/fields';
+import components from '@/components/fields';
 import Layout from './Layout';
 
 const getComponent = (type) => {
-  return type === 'Custom' ? Custom : (fields[type] || fields.Input);
+  return type === 'Custom' ? Custom : (components[type] || components.Input);
 }
 
 const Custom = (props) => {

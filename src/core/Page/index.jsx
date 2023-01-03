@@ -1,13 +1,23 @@
 import components from '@/components';
 
-console.log('=====', components)
-
-export default (props) => {
-  const { spec } = props;
+const Page = (props) => {
+  const spec = Array.isArray(props.spec) ? props.spec : [props.spec];
 
   return (
-    <div>
-      page
-    </div>
+    <>
+      {spec.map((d, i) => {
+        const C = d.type === 'Page' ? Page : (components[d.type] || components.Null);
+
+        return (
+          <C 
+            {...(d.props || {})}  
+            key={i}
+            spec={d.spec}
+          />
+        );
+      })}
+    </>
   );
 }
+
+export default Page;
