@@ -25,6 +25,18 @@ export default [
     },
   },
   {
+    key: 'metadata.height',
+    type: 'Number',
+    label: 'Height',
+    value: '',
+    rules: {
+      hidden: (values) => values.metadata.name === 'haha',
+    },
+    props: {
+      placeholder: '请输入Height',
+    },
+  },
+  {
     key: 'custom',
     type: 'Custom',
     label: 'Hoby',

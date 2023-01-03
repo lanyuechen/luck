@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from '@arco-design/web-react';
-import LuckForm from './index';
+import { useValue } from './ValueProvider';
 
 const Layout = (props) => {
   const { children } = props;
@@ -16,19 +16,15 @@ Layout.Item = (props) => {
   const { label, rules = {}, children, ...otherProps } = props;
   const [helpText, setHelpText] = useState('');
   const [validateStatus, setValidateStatus] = useState();
-  const values = LuckForm.useValue();
+  const values = useValue();
 
   useEffect(() => {
     if (rules.hidden?.(values)) {
       children.props.onChange(undefined);
     }
-    if (rules.disabled?.(values)) {
-      children.props.onChange(undefined);
-    }
   }, [values]);
 
   if (rules.hidden?.(values)) {
-    // children.props.onChange(undefined);
     return null;
   }
 

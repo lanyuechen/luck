@@ -1,25 +1,20 @@
-import { createContext, useContext } from 'react';
 import _ from 'lodash';
 import Layout from './Layout';
 import Custom from './Custom';
-
-const ValueContext = createContext(null);
+import ValueProvider from './ValueProvider';
 
 const Form = (props) => {
   const { spec, value, onChange, ...otherProps } = props;
 
   return (
-    <ValueContext.Provider value={value}>
+    <ValueProvider value={value}>
       <Layout>
         <Custom spec={spec} value={value} onChange={onChange} {...otherProps} />
       </Layout>
-    </ValueContext.Provider>
+    </ValueProvider>
   );
 }
 
 Form.parseValue = Custom.parseValue;
-Form.useValue = () => {
-  return useContext(ValueContext);
-};
 
 export default Form;

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { immerUpdate } from '@/utils/utils';
+import useImmerUpdate from '@/hooks/useImmerUpdate';
 import Layout from './Layout';
 
 const components  = import.meta.globEager('./fields/*.jsx');
@@ -18,6 +18,7 @@ const getComponent = (type) => {
 
 const Custom = (props) => {
   const { spec, value, onChange, ...otherProps } = props;
+  const immerUpdate = useImmerUpdate();
 
   const handleChange = (path, val) => {
     const newValue = immerUpdate(value, path, val);
