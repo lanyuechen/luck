@@ -14,6 +14,11 @@
 
 > 例2：spec = [{ key: 'name' }]，输入“xiaoming”，表单onChange返回值为：{ name: 'xiaoming' }
 
+#### Table
+| 名称 | 类型 | 描述 | 是否必须 | 默认值 |
+| ---- | ---- | ---- | ---- | ---- |
+
+
 ### 类型 
 #### Spec
 | 名称 | 类型 | 描述 | 是否必须 | 默认值 |
@@ -23,5 +28,13 @@
 | label | String | 表单项标签 | 否 | 如果不指定，则为spec.key |
 | value | - | 对应表单项的默认值，类型由type确定 | 否 | - |
 | spec | [Spec](#Spec)\|[Spec](#Spec)[] | 当type=Custom/Map/List时，子表单配置 | 否 | - |
-| rules | Rule[] | 表单验证规则 | 否 | - |
+| rules | [Rule](#Rule) | 表单验证规则 | 否 | - |
 | props | Object | 额外属性 | 否 | - |
+
+#### Rule
+| 名称 | 类型 | 描述 | 是否必须 | 默认值 |
+| ---- | ---- | ---- | ---- | ---- |
+| validateLevel | enum | 表单验证结果类型，配合validator使用，success, warning, error, validating | 否 | error |
+| validator | Promise | 表单验证规则，返回一个Promise，成功表示通过验证，失败返回错误提示 | 否 | - |
+| hidden | (values) => boolean | 是否隐藏该表单项 | 否 | - |
+| disabled | (values) => boolean | 是否禁用该表单项 | 否 | - |

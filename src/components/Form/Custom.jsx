@@ -76,5 +76,4 @@ Custom.parseValue = (spec) => {
   }
 }
 
-
 export default Custom;
