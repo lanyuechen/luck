@@ -14,6 +14,7 @@ const renderRoutes = (routes) => {
     return (
       <Route key={d.path} path={d.path} element={<C />}>
         {renderRoutes(d.routes)}
+        <Route path="*" element={<NotFound />} />
       </Route>
     );
   });

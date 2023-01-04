@@ -1,9 +1,9 @@
+import Page from '@/core/Page';
 
-export default () => {
+import spec from './spec';
 
+export default (props) => {
   return (
-    <>
-      Table
-    </>
+    <Page spec={spec} />
   );
 }

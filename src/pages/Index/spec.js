@@ -21,7 +21,7 @@ export default {
         {
           type: 'Layout.Header',
           spec: {
-            type: 'Empty',
+            type: 'Header',
           },
         },
         {
@@ -33,10 +33,10 @@ export default {
         {
           type: 'Layout.Footer',
           spec: {
-            type: 'Empty',
+            type: 'Footer',
           },
         },
-      ]
-    }
+      ],
+    },
   ],
 }
