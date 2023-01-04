@@ -1,4 +1,4 @@
-import routes from './routes';
+import routes from '@/routes';
 
 export default {
   type: 'Layout',
@@ -11,8 +11,7 @@ export default {
     },
     { type: 'Header' },
     {
-      type: 'Input',
-      spec: [],
+      type: 'Outlet',
     },
     { type: 'Footer' },
   ]

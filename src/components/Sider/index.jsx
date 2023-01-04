@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, Input, Affix } from '@arco-design/web-react';
 import { IconArchive } from '@arco-design/web-react/icon';
 
@@ -11,14 +12,14 @@ const matchKeyword = (val, keyword) => {
 
 const renderMenus = (routes, keyword) => {
   return routes.map(route => {
-    const { key, label, children, ...others } = route;
-    if (children?.length) {
-      const resultMenus = renderMenus(children, keyword);
+    const { path, label, routes, ...others } = route;
+    if (routes?.length) {
+      const resultMenus = renderMenus(routes, keyword);
       if (!resultMenus.length) {
         return null;
       }
       return (
-        <Menu.SubMenu {...others} key={key}
+        <Menu.SubMenu {...others} key={path}
           title={
             <span>
               <IconArchive /> {label}
@@ -34,7 +35,7 @@ const renderMenus = (routes, keyword) => {
     }
 
     return (
-      <Menu.Item {...others} key={key}>
+      <Menu.Item {...others} key={path}>
         <IconArchive />
         {label}
       </Menu.Item>
@@ -43,8 +44,14 @@ const renderMenus = (routes, keyword) => {
 }
 
 export default (props) => {
-  const { routes, onClickMenuItem } = props;
+  const { routes } = props;
   const [keyword, setKeyword] = useState('');
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleClickMenuItem = (key) => {
+    navigate(key);
+  }
 
   return (
     <div style={{height: '100%'}}>
@@ -58,10 +65,10 @@ export default (props) => {
         </div>
       </Affix>
       <Menu
+        selectedKeys={[pathname]}
         autoOpen
-        selectable={false}
         style={{ width: '100%', height: 'calc(100% - 48px)' }}
-        onClickMenuItem={onClickMenuItem}
+        onClickMenuItem={handleClickMenuItem}
       >
         {renderMenus(routes, keyword)}
       </Menu>

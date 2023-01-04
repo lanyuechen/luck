@@ -1,23 +1,31 @@
-import { useState } from 'react';
-import Form from '@/core/Form';
-import Page from '@/core/Page';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import spec from '@/config';
-import formSpec from '@/config/formSpec';
+import pages from '@/pages';
+import routes from './routes';
+
+const NotFound = pages.NotFound;
+
+const renderRoutes = (routes) => {
+  if (!routes?.length) {
+    return null
+  }
+  return routes.map(d => {
+    const C = pages[d.component]
+    return (
+      <Route key={d.path} path={d.path} element={<C />}>
+        {renderRoutes(d.routes)}
+      </Route>
+    );
+  });
+}
 
 export default () => {
-  const [value, setValue] = useState(Form.parseValue(formSpec));
-
   return (
-    <>
-      <Page
-        spec={spec}
-      />
-      {/* <Form
-        spec={spec}
-        value={value}
-        onChange={(v) => setValue(v)}
-      /> */}
-    </>
+    <Router>
+      <Routes>
+        {renderRoutes(routes)}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
