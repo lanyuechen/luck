@@ -1,8 +1,7 @@
-
 export default () => {
   return (
     <>
-      Header
+      Empty
     </>
   );
 }

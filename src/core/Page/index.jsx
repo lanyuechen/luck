@@ -2,6 +2,10 @@ import components from '@/components';
 
 const Page = (props) => {
   const spec = Array.isArray(props.spec) ? props.spec : [props.spec];
+  
+  if (!spec.length) {
+    return null;
+  }
 
   return (
     <>
@@ -9,7 +13,7 @@ const Page = (props) => {
         const C = d.type === 'Page' ? Page : (components[d.type] || components.Null);
 
         return (
-          <C 
+          <C
             {...(d.props || {})}  
             key={i}
             spec={d.spec}

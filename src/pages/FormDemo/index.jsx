@@ -13,6 +13,11 @@ export default () => {
         value={value}
         onChange={(v) => setValue(v)}
       />
+      <code>
+        <pre>
+          {JSON.stringify(value, undefined, 2)}
+        </pre>
+      </code>
     </>
   );
 }

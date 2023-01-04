@@ -1,5 +1,18 @@
 export default [
   {
+    key: 'type',
+    type: 'Select',
+    label: 'Type',
+    props: {
+      placeholder: '请选择Type',
+      options: [
+        { key: 'pod', label: 'Pod' },
+        { key: 'node', label: 'Node' },
+        { key: 'deployment', label: 'Deployment' },
+      ]
+    },
+  },
+  {
     key: 'metadata.name',
     type: 'Input',
     label: 'Name',
@@ -18,7 +31,7 @@ export default [
     label: 'Age',
     value: '',
     rules: {
-      hidden: (values) => values.metadata.name === 'haha',
+      hidden: (values) => values.type === 'pod',
     },
     props: {
       placeholder: '请输入Age',
@@ -30,7 +43,7 @@ export default [
     label: 'Height',
     value: '',
     rules: {
-      hidden: (values) => values.metadata.name === 'haha',
+      hidden: (values) => values.type === 'pod',
     },
     props: {
       placeholder: '请输入Height',
@@ -47,7 +60,7 @@ export default [
         type: 'Input',
         label: 'Custom.Input',
         rules: {
-          disabled: (values) => values.metadata.name === 'haha',
+          disabled: (values) => values.type === 'pod',
         },
       },
     ],
