@@ -7,7 +7,7 @@ export default {
   },
   spec: [
     {
-      type: 'LayoutSider',
+      type: 'Layout.Sider',
       spec: {
         type: 'Sider',
         props: {
@@ -19,19 +19,19 @@ export default {
       type: 'Layout',
       spec: [
         {
-          type: 'LayoutHeader',
+          type: 'Layout.Header',
           spec: {
             type: 'Empty',
           },
         },
         {
-          type: 'LayoutContent',
+          type: 'Layout.Content',
           spec: {
             type: 'Outlet',
           },
         },
         {
-          type: 'LayoutFooter',
+          type: 'Layout.Footer',
           spec: {
             type: 'Empty',
           },
