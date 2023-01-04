@@ -1,9 +1,12 @@
+import * as arcoComponents from '@arco-design/web-react';
+
 const components  = import.meta.globEager('./*/index.jsx');
 
-const res = {};
+const res = {
+  ...arcoComponents,
+};
 
 for(const [key, value] of Object.entries(components)) {
-  console.log('===', key, value)
   const name = key.split('/')[1];
   if (name) {
     res[name] = value.default;

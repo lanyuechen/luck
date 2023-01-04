@@ -9,9 +9,9 @@ const matchKeyword = (val, keyword) => {
   return val.toLowerCase().includes(keyword.toLowerCase());
 }
 
-const renderMenus = (menus, keyword) => {
-  return menus.map(menu => {
-    const { key, label, children, ...others } = menu;
+const renderMenus = (routes, keyword) => {
+  return routes.map(route => {
+    const { key, label, children, ...others } = route;
     if (children?.length) {
       const resultMenus = renderMenus(children, keyword);
       if (!resultMenus.length) {
@@ -43,7 +43,7 @@ const renderMenus = (menus, keyword) => {
 }
 
 export default (props) => {
-  const { menus, onClickMenuItem } = props;
+  const { routes, onClickMenuItem } = props;
   const [keyword, setKeyword] = useState('');
 
   return (
@@ -63,7 +63,7 @@ export default (props) => {
         style={{ width: '100%', height: 'calc(100% - 48px)' }}
         onClickMenuItem={onClickMenuItem}
       >
-        {renderMenus(menus, keyword)}
+        {renderMenus(routes, keyword)}
       </Menu>
     </div>
   );

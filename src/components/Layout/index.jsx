@@ -27,39 +27,38 @@ export default (props) => {
     } else {
       setSiderWidth(width);
       setCollapsed(!(width > minWidth + 20));
-    }
+    }查询
   }
 
   return (
     <>
       <Layout style={{height: '100vh'}}>
-        <Layout.Header>
+        <Layout.Sider
+          collapsible
+          collapsed={collapsed}
+          width={siderWidth}
+          resizeBoxProps={{
+            directions: ['right'],
+            onMoving: handleMoving,
+          }}
+          style={{
+            maxWidth,
+          }}
+          onCollapse={onCollapse}
+        >
           <Page spec={spec[0]} />
-        </Layout.Header>
+        </Layout.Sider>
         <Layout>
-          <Layout.Sider
-            collapsible
-            collapsed={collapsed}
-            width={siderWidth}
-            resizeBoxProps={{
-              directions: ['right'],
-              onMoving: handleMoving,
-            }}
-            style={{
-              // height: '100%',
-              maxWidth,
-            }}
-            onCollapse={onCollapse}
-          >
+          <Layout.Header>
             <Page spec={spec[1]} />
-          </Layout.Sider>
+          </Layout.Header>
           <Layout.Content style={{padding: 8}}>
             <Page spec={spec[2]} />
           </Layout.Content>
+          <Layout.Footer>
+            <Page spec={spec[3]} />
+          </Layout.Footer>
         </Layout>
-        <Layout.Footer>
-          <Page spec={spec[3]} />
-        </Layout.Footer>
       </Layout>
     </>
   );

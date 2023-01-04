@@ -1,17 +1,17 @@
-import menus from './menus';
+import routes from './routes';
 
 export default {
   type: 'Layout',
   spec: [
-    { type: 'Header' },
     {
       type: 'Sider',
       props: {
-        menus,
+        routes,
       }
     },
+    { type: 'Header' },
     {
-      type: 'Page',
+      type: 'Input',
       spec: [],
     },
     { type: 'Footer' },
