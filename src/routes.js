@@ -7,12 +7,12 @@ export default [
       {
         label: 'Form',
         path: '/demo/form',
-        component: 'Demo.Form',
+        component: 'demo.Form',
       },
       {
         label: 'Table',
         path: '/demo/table',
-        component: 'Demo.Table',
+        component: 'demo.Table',
       }
     ]
   }

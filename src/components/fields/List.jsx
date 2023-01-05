@@ -1,6 +1,6 @@
 import { Grid, Button } from '@arco-design/web-react';
 import { IconPlus, IconDelete } from '@arco-design/web-react/icon';
-import Custom from '@/core/Form/Custom';
+import Custom from '@/components/Form/Custom';
 
 export default (props) => {
   const { value = [], onChange, spec, ...otherProps } = props;

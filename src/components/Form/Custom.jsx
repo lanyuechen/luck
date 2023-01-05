@@ -12,7 +12,7 @@ const Custom = (props) => {
   const immerUpdate = useImmerUpdate();
 
   const handleChange = (path, val) => {
-    const newValue = immerUpdate(value, path, val);
+    const newValue = immerUpdate(value || {}, path, val);
     onChange(newValue);
   }
 

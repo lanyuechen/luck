@@ -1,4 +1,4 @@
-const components  = import.meta.globEager('./**/index.jsx');
+const components  = import.meta.globEager('./**/index.js');
 
 const res = {};
 

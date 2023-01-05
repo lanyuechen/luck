@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import components from '@/components';
 
 const Page = (props) => {
   const spec = Array.isArray(props.spec) ? props.spec : [props.spec];
+  const [store, setStore] = useState({});
   
   if (!spec.length) {
     return null;
@@ -14,9 +16,15 @@ const Page = (props) => {
 
         return (
           <C
-            {...(d.props || {})}  
+            {...(d.props || {})}
             key={i}
             spec={d.spec}
+            scope={store}
+            value={store[d.key] || {}}
+            onChange={(value) => {
+              setStore({...store, [d.key]: value});
+              d.onChange?.(value);
+            }}
           />
         );
       })}
