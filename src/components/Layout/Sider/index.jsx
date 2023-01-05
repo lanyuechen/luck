@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Layout } from '@arco-design/web-react';
-import Page from '@/core/Page';
+import Page from '@/components/Page';
 
 const minWidth = 60;
 const normalWidth = 256;

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Page from '@/core/Page';
+import Page from '@/components/Page';
 import NotFound from '@/components/NotFound';
 import pages from '@/pages';
 import routes from './routes';

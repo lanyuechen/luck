@@ -1,5 +1,5 @@
 import { Layout } from '@arco-design/web-react';
-import Page from '@/core/Page';
+import Page from '@/components/Page';
 
 export default (props) => {
   const { spec } = props;
