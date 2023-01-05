@@ -13,6 +13,11 @@ export default [
         label: 'Table',
         path: '/demo/table',
         component: 'demo.Table',
+      },
+      {
+        label: 'ListPage',
+        path: '/demo/list-page',
+        component: 'demo.ListPage',
       }
     ]
   }
