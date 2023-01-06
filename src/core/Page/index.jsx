@@ -32,4 +32,8 @@ const Page = (props) => {
   );
 }
 
+Page.createElement = (props) => (
+  <Page {...props} />
+);
+
 export default Page;

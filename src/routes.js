@@ -1,5 +1,10 @@
 export default [
   {
+    label: 'Login',
+    path: '/login',
+    component: 'Login',
+  },
+  {
     label: 'Demo',
     path: '/demo',
     component: 'Index',

@@ -1,4 +1,5 @@
 import { wait } from '@/utils/utils';
+import SERVICE from '@/utils/service';
 
 export default {
   type: 'ListPage',
@@ -6,23 +7,13 @@ export default {
     columns: [
       {
         title: 'Name',
-        dataIndex: 'name',
+        dataIndex: 'metadata.name',
       },
       {
-        title: 'Age',
-        dataIndex: 'age',
+        title: '创建时间',
+        dataIndex: 'metadata.creationTimestamp',
       }
     ],
-    service: {
-      list: async () => {
-        await wait(1000);
-        return {
-          data: [
-            { id: 1, name: 'xiaoming', age: 12 },
-            { id: 2, name: 'xiaohong', age: 21 },
-          ],
-        };
-      }
-    }
-  }
-}
+    service: SERVICE('local')('namespaces'),
+  },
+};

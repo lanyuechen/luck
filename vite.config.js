@@ -12,6 +12,20 @@ if (process.env.NODE_ENV === 'production') {
 // https://vitejs.dev/config/
 export default defineConfig({
   base,
+  server: {
+    proxy: {
+      '/ucp': {
+        target: 'https://d4s-47.sensetime.com',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/k8s': {
+        target: 'https://d4s-47.sensetime.com',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
   build: {
     assetsDir: '',
     rollupOptions: {

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Page from '@/core/Page';
+import { AuthProvider } from '@/utils/auth';
 import NotFound from '@/components/NotFound';
 import pages from '@/pages';
 import routes from './routes';
@@ -10,9 +10,9 @@ const renderRoutes = (routes) => {
     return null
   }
   return routes.map(d => {
-    const spec = pages[d.component];
+    const C = pages[d.component] || NotFound;
     return (
-      <Route key={d.path} path={d.path} element={<Page spec={spec} />}>
+      <Route key={d.path} path={d.path} element={<C />}>
         {renderRoutes(d.routes)}
         <Route path="*" element={<NotFound />} />
       </Route>
@@ -22,11 +22,13 @@ const renderRoutes = (routes) => {
 
 export default () => {
   return (
-    <Router>
-      <Routes>
-        {renderRoutes(routes)}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {renderRoutes(routes)}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
