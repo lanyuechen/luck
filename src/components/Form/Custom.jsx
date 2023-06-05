@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import useImmerUpdate from '@/hooks/useImmerUpdate';
-import components from '@/components/fields';
+import components from './components';
 import Layout from './Layout';
 
 const getComponent = (type) => {
@@ -8,7 +8,7 @@ const getComponent = (type) => {
 }
 
 const Custom = (props) => {
-  const { spec, value, onChange, ...otherProps } = props;
+  const { spec = {}, value, onChange, ...otherProps } = props;
   const immerUpdate = useImmerUpdate();
 
   const handleChange = (path, val) => {
@@ -48,6 +48,10 @@ const Custom = (props) => {
 }
 
 Custom.parseValue = (spec) => {
+  if (!spec) {
+    return '';
+  }
+
   if (Array.isArray(spec)) {
     const value = {};
     for (const d of spec) {
@@ -63,7 +67,7 @@ Custom.parseValue = (spec) => {
   if (spec.type === 'Custom') {
     return Custom.parseValue(spec.spec);
   } else {
-    return spec.value;
+    return spec.value || '';
   }
 }
 
