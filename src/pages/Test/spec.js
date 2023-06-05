@@ -4,25 +4,36 @@ export default [
     type: 'Select',
     value: 'default',
     props: {
-      placeholder: '请选择类型',
       options: [
         { key: 'default', label: 'default' },
         { key: 'map', label: 'map' },
         { key: 'list:string', label: 'list:string' },
         { key: 'list:map', label: 'list:map' },
+        { key: 'disable name', label: 'disable name' },
+        { key: 'hide name', label: 'hide name' },
       ]
     },
   },
   {
     key: 'name',
+    props: (values) => {
+      return {
+        placeholder: `请输入${values.type}的Name`,
+      };
+    },
+    rules: {
+      validateLevel: 'error',
+      validator: (value) => value || Promise.reject('请输入Name'),
+      disabled: (values) => values.type === 'disable name',
+      hidden: (values) => values.type === 'hide name',
+    },
+  },
+  {
+    key: 'meta.name',
     rules: {
       validateLevel: 'error',
       validator: (value) => value || Promise.reject('请输入Name'),
     },
-  },
-  {
-    key: 'metadata.name',
-    label: 'metadata.name',
   },
   {
     key: 'map',

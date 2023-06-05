@@ -8,7 +8,7 @@ const getComponent = (type) => {
 }
 
 const Custom = (props) => {
-  const { spec = {}, value, onChange, ...otherProps } = props;
+  const { spec = {}, value, onChange } = props;
   const immerUpdate = useImmerUpdate();
 
   const handleChange = (path, val) => {
@@ -19,11 +19,12 @@ const Custom = (props) => {
   if (Array.isArray(spec)) {
     return spec.map(d => {
       const C = getComponent(d.type);
+      const cProps = (typeof d.props === 'function' ? d.props(value) : d.props) || {};
   
       return (
         <Layout.Item key={d.key} label={d.label || d.key} rules={d.rules}>
           <C
-            {...(d.props || {})}
+            {...cProps}
             spec={d.spec} // Custom(Form/Custom)/List组件/Map组件
             value={_.get(value, d.key)}
             onChange={(val) => handleChange(d.key, val)}
